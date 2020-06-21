@@ -1,0 +1,26 @@
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+	<title>어머이건사야해</title>
+
+	<!-- CSRF Token -->
+	<meta name="_csrf_token" th:content="${_csrf.token}" />
+
+	<!-- Manifest -->
+	<link rel="manifest" href="/assets/manifest.json">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="/images/favicon.png">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-toggle.min.css">
+	<link rel="stylesheet" href="/css/all.min.css">
+
+	<link th:if="${viewName eq 'main' || #strings.isEmpty(viewName)}" rel="stylesheet" href="/css/main.css">
+	<link th:if="${viewName eq 'signform'}" rel="stylesheet" href="/css/signform.css">
+	<link th:if="${viewName eq 'info'}" rel="stylesheet" href="/css/info.css">
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Nanum+Gothic:400,700&amp;subset=korean">
+</head>

@@ -1,0 +1,25 @@
+HELP.md
+bin/
+logs/
+profile/
+/build/
+!**/src/main/**
+!**/src/test/**
+
+### Gradle ###
+.gradle
+bulid/
+gradle-app.setting
+gradle/wrapper/gradle-wrapper.properties
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### VS Code ###
+.vscode/

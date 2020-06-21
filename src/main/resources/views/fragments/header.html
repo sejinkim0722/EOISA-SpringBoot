@@ -1,0 +1,141 @@
+<header>
+    <!-- TopNav -->
+    <div id="div-top">
+        <div id="div-top-content" class="container">
+            <div id="div-logo" class="col-lg-3 col-md-12">
+                <button type="button" class="btn btn-sidenav-open component-mobile"></button>
+                <a href="/">
+                    <img class="component-desktop" src="/images/logo.png" alt="logo">
+                    <img class="component-mobile" src="/images/logo_mobile.png" alt="logo">
+                </a>
+            </div>
+            <div id="div-search" class="col-lg-5 col-md-12">
+                <form id="form-search" method="POST" action="/search">
+                    <input type="text" name="keyword" spellcheck="false" autocomplete="off" maxlength="20">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                </form>
+                <i class="fas fa-search fa-2x"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- MainNav -->
+    <nav class="navbar navbar-expand navbar-light top-navbar" data-toggle="sticky-onscroll">
+        <div class="navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item home">
+                    <a href="/"><i class="fas fa-shopping-cart"></i> 어머이건사야해</a>
+                </li>
+                <li class="component-desktop" style="color: #ced1cc;">|</li>
+                <li class="nav-item rank"><a href="/rank"><i
+                        class="fas fa-fire"></i> 핫딜 랭킹</a></li>
+                <li class="component-desktop" style="color: #ced1cc;">|</li>
+                <li class="nav-item theme">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown"><i class="fas fa-lightbulb"></i> 테마 핫딜</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/theme/issue">화제의 핫딜</a></li>
+                            <li><a class="dropdown-item" href="/theme/likeit">추천 많은 핫딜</a></li>
+                            <li><a class="dropdown-item" href="/theme/coffee">커피 한잔 값 핫딜</a></li>
+                            <li><a class="dropdown-item" href="/theme/merit">핫딜 유력</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- 
+                <li class="component-desktop" style="color: #ced1cc;">|</li>
+                <li class="nav-item community component-desktop">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown"><i class="fas fa-users"></i> 커뮤니티</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">공지사항</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="#">자유게시판</a></li>
+                            <li><a class="dropdown-item" href="#">후기게시판</a></li>
+                        </ul>
+                    </div>
+                </li>
+                -->
+                <li class="component-desktop" style="color: #ced1cc;">|</li>
+                <li class="nav-item notification component-desktop">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown"><i class="fas fa-bell"></i> 핫딜 알림</a>
+                        <ul class="dropdown-menu">
+                            <li style="text-align: center;">
+                                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-on="새 핫딜 알림 켬" data-off="새 핫딜 알림 끔" data-width="145" data-height="25">
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="component-desktop" style="color: #ced1cc;">|</li>
+                <li class="nav-item info component-desktop">
+                    <a href="/info"><i class="fas fa-info-circle"></i> 사이트 안내</a>
+                </li>
+                <!-- 
+                <li class="nav-item community component-mobile">
+                    <a href="#"> 커뮤니티</a>
+                </li>
+                -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SideNav (for Mobile) -->
+    <div class="sidenav component-mobile">
+        <button type="button" class="btn btn-sidenav-close">
+            <i class="fas fa-times fa-2x"></i>
+        </button>
+        <div sec:authorize="!isAuthenticated()" class="sidenav-profile">
+            <img src="/images/favicon.png" id="profile-img" class="rounded-circle" alt="게스트 프로필 이미지">
+            <h4 class="text-dark">
+                <strong>Guest</strong>
+            </h4>
+        </div>
+        <div class="sidenav-profile" sec:authorize="isAuthenticated()">
+            <img th:src="${#strings.isEmpty(profile_pic) ? '/images/profile.png' : profile_pic}" id="profile-img" class="rounded-circle" alt="유저 프로필 이미지">
+            <h4 class="text-dark">
+                <strong sec:authentication="principal.nickname"></strong>&nbsp;<small class="text-black-50" sec:authentication="principal.platform"></small>
+            </h4>
+        </div>
+        <hr>
+        <a sec:authorize="!isAuthenticated()" data-toggle="modal" data-target="#modal-signin">
+            <i class="fas fa-sign-in-alt"></i> 로그인
+        </a>
+        <a data-toggle="modal" data-target="#modal-modify-userinfo" data-backdrop="static" data-keyboard="false" sec:authorize="isAuthenticated()">
+            <i class="fas fa-user-edit"></i> 회원정보수정
+        </a>
+        <form sec:authorize="isAuthenticated()" id="form-signout-mobile" action="/sign/signout" method="POST">
+            <button class="sidenav-signout-btn" type="submit" form="form-signout-mobile">
+                <i class="fas fa-sign-out-alt"></i> 로그아웃
+            </button>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+        <a href="/"><i class="fas fa-home"></i> 어머이건사야해</a>
+        <a href="/rank"><i class="fab fa-hotjar"></i> 핫딜 랭킹</a>
+        <button class="sidenav-dropdown-btn" data-toggle="collapse" data-target=".sidenav-themedeal-dropdown">
+            <i class="fas fa-lightbulb"></i> 테마 핫딜<i class="fas fa-caret-down"></i>
+        </button>
+        <div class="sidenav-themedeal-dropdown collapse">
+            <a href="/theme/issue">화제의 핫딜</a>
+            <a href="/theme/likeit">추천 많은 핫딜</a>
+            <a href="/theme/coffee">커피 한 잔 값 핫딜</a>
+            <a href="/theme/merit">핫딜 유력</a>
+        </div>
+        <!--
+        <button class="sidenav-dropdown-btn" data-toggle="collapse" data-target=".sidenav-community-dropdown">
+            <i class="fas fa-users"></i> 커뮤니티<i class="fas fa-caret-down"></i>
+        </button>
+        <div class="sidenav-community-dropdown collapse">
+            <a href="#">공지사항</a>
+            <a href="#">자유게시판</a>
+            <a href="#">후기게시판</a>
+        </div>
+        -->
+        <a>
+            <i class="fas fa-bell"></i> 핫딜 알림
+            <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-size="mini" data-on="ON" data-off="OFF" data-width="50">
+        </a>
+        <a href="/info"><i class="fas fa-info-circle"></i> 사이트 안내</a>
+        <hr>
+    </div>
+    <div class="sidenav-overlay component-mobile"></div>
+</header>

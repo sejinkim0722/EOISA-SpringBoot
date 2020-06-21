@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias alias="MainDTO" type="com.ksj.eoisa.dto.MainDTO" />
+		<typeAlias alias="ReplyDTO" type="com.ksj.eoisa.dto.ReplyDTO"/>
+		<typeAlias alias="SignDTO" type="com.ksj.eoisa.dto.SignDTO"/>
+		<typeAlias alias="BoardDTO" type="com.ksj.eoisa.dto.BoardDTO"/>
+		<typeAlias alias="NoticeBoardDTO" type="com.ksj.eoisa.dto.NoticeBoardDTO"/>
+	</typeAliases>
+		
+	<mappers>
+		<mapper resource="mybatis/mapper/Main.xml" />
+		<mapper resource="mybatis/mapper/Reply.xml" />
+		<mapper resource="mybatis/mapper/Sign.xml" />
+		<mapper resource="mybatis/mapper/NoticeBoard.xml" />
+		<mapper resource="mybatis/mapper/Board.xml" />
+	</mappers>
+</configuration>

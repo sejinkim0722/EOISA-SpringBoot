@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head.html"></head>
+
+<body>
+	<!-- Page Loading Indicator -->
+	<div class="page-loading-indicator"></div>
+
+    <!-- Header -->
+    <header th:replace="fragments/header.html"></header>
+
+	<!-- Main -->
+	<div id="main" class="container base">	
+		<div class="content row">
+			<th:block sec:authorize="isAuthenticated()">
+				<input type="hidden" name="username" th:value="${principal.username}">
+				<input type="hidden" name="nickname" th:value="${principal.nickname}">
+				<input type="hidden" name="profile_pic" th:value="${principal.profile_pic}">
+			</th:block>
+		    
+			<!-- Main-Content -->
+			<div id="main-content-wrapper" class="col-lg-12 col-md-12">
+				<div class="wrapper">
+					<!-- Start navbar -->
+					<div id="navbar" class="navbar">
+						<ul class="nav-menu">
+							<li>
+								<a data-scroll="gr-1" href="#gr-1" class="dot">
+									<span>STEP 1</span>
+								</a>
+							</li>
+							<li>
+								<a data-scroll="gr-2" href="#gr-2" class="dot">
+									<span>STEP 2</span>
+								</a>
+							</li>
+							<li>
+								<a data-scroll="gr-3" href="#gr-3" class="dot">
+									<span>STEP 3</span>
+								</a>
+							</li>
+							<li>
+								<a data-scroll="gr-4" href="#gr-4" class="dot">
+									<span>STEP 4</span>
+								</a>
+							</li>
+							<li>
+								<a data-scroll="gr-5" href="#gr-5" class="dot">
+									<span>STEP 5</span>
+								</a>
+							</li>
+							<li>
+								<a data-scroll="gr-6" href="#gr-6" class="dot">
+									<span>STEP 6</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- End navbar -->
+
+					<div id="gr-title">
+						<img src="/images/information.jpg" alt="info_title">
+					</div>
+					<div id="gr-1" class="gr-bg bg-1">            
+						<div class="gr-contents-odd row align-items-center">
+							<div id="border" class="row align-items-center">
+								<div id="border-txt1">
+									<p class="steps">STEP 1</p>
+									<br>
+									<p class="title">어머! 이건 사야 해~!</p><br/>
+									<p class="cont">'지름신이 강림한 모두를 위해'<br/><br/>온라인 커뮤니티 곳곳의<br/>핫딜 정보들을 한 데 모아<br/>편리하게 볼 수 있습니다.</p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-odd align-items-center">
+							<img src="/images/info_main.png" alt="info_main">
+						</div>
+					</div>
+					<div id="gr-2" class="gr-bg bg-2">
+						<div class="gr-contents-even row align-items-center">
+							<div id="border2" class="row align-items-center">
+								<div id="border-txt2">
+									<p class="steps">STEP 2</p>
+									<br>
+									<p class="title">실시간 핫딜 알림</p><br/>
+									<p class="cont">'하루 종일 눈팅할 필요가 없다!'<br/><br/>새로운 핫딜이 등록될 때마다<br/>웹/모바일 푸시 메시지를<br/>받아볼 수 있습니다.<br/>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-even align-items-center">
+							<img src="/images/info_main_1.png" alt="info_main">
+						</div>
+					</div>
+					<div id="gr-3" class="gr-bg bg-3">    
+						<div class="gr-contents-odd row align-items-center">
+							<div id="border3" class="row align-items-center">
+								<div id="border-txt3">
+									<p class="steps">STEP 3</p>
+									<br>
+									<p class="title">네이버 최저가 비교</p><br/>
+									<p class="cont">'이거 진짜 핫딜 맞아?'<br/></br>실시간으로 업데이트되는<br/>네이버쇼핑 최저가 정보를 통해<br/>가격을 비교해볼 수 있습니다.</p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-odd align-items-center">
+							<img src="/images/info_main_2.png" alt="info_main">
+						</div>    
+					</div>
+					<div id="gr-4" class="gr-bg bg-4">    
+						<div class="gr-contents-even row align-items-center">
+							<div id="border4" class="row align-items-center">
+								<div id="border-txt4">
+									<p class="steps">STEP 4</p>
+									<br>
+									<p class="title">테마 핫딜 기능</p><br/>
+									<p class="cont">'커피 한 잔 가격, 화제의 딜 …'<br/><br/>특정 주제로 재정렬된<br/>알짜배기 핫딜들만 골라보세요!<br/></p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-even align-items-center">
+							<img src="/images/info_coffee.png" alt="info_main">
+						</div>    
+					</div>
+					<div id="gr-5" class="gr-bg bg-5">
+						<div class="gr-contents-odd row align-items-center">
+							<div id="border5" class="row align-items-center">
+								<div id="border-txt5">
+									<p class="steps">STEP 5</p>
+									<br>
+									<p class="title">키워드&필터링 검색</p><br/>
+									<p class="cont">'검색으로 쉽고 빠르게'<br/><br/>키워드 및 필터링 검색을 통해<br/>내 관심사에 부합하는 핫딜을<br/>찾아볼 수 있습니다.</p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-odd align-items-center">
+							<img src="/images/info_main_3.png" alt="info_main">
+						</div>
+					</div>
+					<div id="gr-6" class="gr-bg bg-6">
+						<div class="gr-contents-even row align-items-center">
+							<div id="border6">
+								<div id="border-txt6">
+									<p class="steps">STEP 6</p>
+									<br>
+									<p class="title">어떤 접속 환경도 OK</p><br/>
+									<p class="cont">'프로그레시브 웹 앱 지향'<br/><br/>디바이스, 브라우저와 관계 없이<br/>최적의 사이트 환경 제공!</p>
+								</div>
+							</div>
+						</div>
+						<div class="gr-contents-img-even align-items-center">
+							<img src="/images/info_main_4.png" alt="info_main">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	<th:block th:replace="fragments/modals.html"></th:block>
+
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-toggle.min.js"></script>
+	<script src="/js/mobile-detect.min.js"></script>
+	<script src="/js/info.js"></script>
+	<script src="//www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+	<script src="//www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+	<script src="/js/fcm.js"></script>
+</body>
+
+</html>

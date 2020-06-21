@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head.html"></head>
+
+<body>
+	<!-- Page Loading Indicator -->
+	<div class="page-loading-indicator"></div>
+
+	<!-- Header -->
+	<header th:replace="fragments/header.html"></header>
+
+	<!-- Main contents -->
+	<div th:replace="fragments/contents.html"></div>
+
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-toggle.min.js"></script>
+	<script src="/js/mobile-detect.min.js"></script>
+	<script src="/js/infinite-scroll.pkgd.min.js"></script>
+	<script src="/js/jquery.easy-ticker.min.js"></script>
+	<script src="/js/clipboard.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/reply.js"></script>
+	<script src="/js/social-signin.js"></script>
+	<script src="//www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+	<script src="//www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+	<script src="/js/fcm.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!-- Signin Modal -->
+<div sec:authorize="!isAuthenticated()" id="modal-signin" class="modal fade">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark"><i class="fas fa-key"></i> Sign in</h5>
+            </div>
+            <div class="modal-body">
+                <div id="sign-body">
+                    <a href="/sign/form" id="signin-eoisa" class="btn btn-sign">
+                        <img src="/images/eoisa.png" alt="어이사 아이콘">
+                        <span id="eoisa">　어이사 로그인</span>
+                    </a>
+                    <button id="social-signin-naver" class="btn btn-sign">
+                        <img src="/images/naver.png" alt="네이버 아이콘">
+                        <span id="naver">　네이버 로그인</span>
+                    </button>
+                    <button id="social-signin-kakao" class="btn btn-sign">
+                        <img src="/images/kakao.png" alt="카카오 아이콘">
+                        <span id="kakao">　카카오 로그인</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-close" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modify Userinfo Modal -->
+<div sec:authorize="isAuthenticated()" id="modal-modify-userinfo" class="modal fade">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark">
+                    <i class="fas fa-user-edit"></i> 회원정보수정
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="userinfo-body">
+                    <th:block th:if="${#authentication.getPrincipal().getPlatform() eq 'EOISA'}">
+                        <div class="div-username">
+                            <label for="input-username"><i class="fas fa-envelope"></i> EMAIL <small>(Cannot Modify)</small></label>
+                            <br>
+                            <input type="text" id="input-username" name="username" autocomplete="false" spellcheck="false" maxlength="25" th:placeholder="${#authentication.getPrincipal().getUsername()}" readonly>
+                        </div>
+                        <hr>
+                    </th:block>
+                    <div class="div-nickname">
+                        <label for="input-nickname"><i class="fas fa-id-card"></i> NICKNAME</label>
+                        <button type="button" id="btn-namecheck" class="btn btn-info btn-xs" disabled>중복확인</button>
+                        <strong class="message-namecheck"></strong>
+                        <br>
+                        <input type="text" id="input-nickname" name="nickname" autocomplete="false" spellcheck="false" maxlength="10" th:value="${#authentication.getPrincipal().getNickname()}" required>
+                    </div>
+                    <hr>
+                    <div class="div-password">
+                        <label for="input-password"><i class="fas fa-unlock"></i> PASSWORD</label>
+                        <strong class="message-passwordcheck"></strong>
+                        <br>
+                        <input type="password" id="input-password" name="password" maxlength="50" placeholder="4자 이상의 숫자+영문+특수기호 조합">
+                    </div>
+                    <hr>
+                    <th:block th:if="${#authentication.getPrincipal().getPlatform() eq 'EOISA'}">
+                        <div class="div-profile">
+                            <label for="input-profile"><i class="fas fa-camera-retro"></i> PROFILE</label>
+                            <br>
+                            <img th:src="${#strings.isEmpty(#authentication.getPrincipal().getProfile_pic()) ? '/images/profile.png' : #authentication.getPrincipal().getProfile_pic()}" id="profile-img" class="rounded-circle" alt="유저 프로필 이미지">
+                            <form id="form-profile">
+                                <input type="file" id="input-profile" name="profile_pic" formenctype="multipart/form-data" accept="image/jpeg, image/png">
+                            </form>
+                            <button type="button" class="btn btn-dark">업로드</button>
+                        </div>
+                        <hr>
+                    </th:block>
+                    <div class="div-wishlist">
+                        <label><i class="fas fa-heartbeat"></i> WISHLIST</label>
+                        <p th:if="${#lists.isEmpty(wishlist)}" class="text-secondary">찜한 핫딜이 없어요!</p>
+                        <ul th:unless="${#lists.isEmpty(wishlist)}">
+                            <th:block th:each="wishes : ${wishlist}">
+                                <li class="wishes" th:attr="data-dealno=${wishes.dealno}">
+                                    <a th:href="${'/search/' + wishes.goods_title}" th:text="${wishes.goods_title}"></a>
+                                    <span th:text="${wishes.writetime}" class="badge badge-fill badge-secondary"></span>
+                                    <button type="button" class="btn btn-xs btn-light" onclick="window.open('/deal/' + '[[${wishes.dealno}]]')">바로가기</button>
+                                </li>
+                            </th:block>
+                        </ul>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-complete" class="btn btn-danger">수정 완료</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>

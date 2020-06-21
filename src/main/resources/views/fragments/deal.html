@@ -1,0 +1,105 @@
+<div th:if="${#lists.isEmpty(deal)}" class="result-info">
+	<i class="far fa-times-circle"></i> 핫딜 정보가 없습니다.
+</div>
+
+<span id="total-page" data-key="totalPage" th:attr="data-value=${totalPage}"></span>
+<div id="main-content">
+	<ul th:unless="${#lists.isEmpty(deal)}">
+		<th:block th:each="deal : ${deal}">
+			<li th:class="${#strings.isEmpty(deal.isended) ? 'deal-list' : 'deal-list ended'}" th:attr="data-dealno=${deal.dealno}">
+				<div class="post-group">
+					<div class="deal-header">
+						<p>
+							<span>
+								<th:block th:if="${#strings.isEmpty(deal.isended)}">
+									<label class="bg-secondary"><i class="fas fa-stopwatch"></i>[[${deal.writetime}]]</label>
+								</th:block>
+								<th:block th:unless="${#strings.isEmpty(deal.isended)}">
+									<label class="bg-faded"><i class="fas fa-stopwatch"></i><strong>[[${deal.isended}]]</strong></label>
+								</th:block>
+								<th:block th:unless="${#strings.isEmpty(deal.site_buy)}">
+									<label class="bg-info"><i class="fas fa-shopping-bag"></i>[[${deal.site_buy}]]</label>
+								</th:block>
+								<th:block th:unless="${#strings.isEmpty(deal.site_src)}">
+									<label class="bg-info"><i class="fas fa-flag"></i>[[${deal.site_src}]]</label>
+								</th:block>
+								<th:block th:each="rankingList : ${ranking}">
+									<label th:if="*{rankingList['DEALNO'] eq deal.dealno}" class="bg-danger float-right"><i class="fas fa-fire-alt"></i>랭킹 [[*{rankingList['RK']}]]위</label>
+								</th:block>
+							</span>
+						</p>
+					</div>
+					<div class="thumbnail">
+						<img th:src="${#strings.isEmpty(deal.goods_pic) ? '/images/dealimg.png' : deal.goods_pic}" alt="상품 섬네일 이미지">
+					</div>
+					<div class="dealinfo">
+						<p>
+							<a th:href="${'/deal/' + deal.dealno}" th:text="${deal.goods_title}" target="_blank" rel="noopener noreferrer"></a>
+						</p>
+						<p class="price">
+							<i class="far fa-credit-card"></i>&nbsp;<span th:text="${deal.price eq null ? '-' : deal.price}">
+							<i class="fas fa-truck"></i>&nbsp;<span th:text="${deal.deliever_fee eq null ? '-' : deal.deliever_fee}">
+						</p>
+						<p class="naver-price">
+							<img src="/images/ns.png" alt="네이버쇼핑 아이콘">
+							<span th:text="${deal.price_naver eq '정보 없음' ? deal.price_naver : deal.price_naver + '원'}"></span>
+							<th:block th:unless="${#strings.isEmpty(deal.merit)}">
+								<small th:class="${#strings.contains(deal.merit, '-') ? 'text-secondary' : 'text-success'}" th:text="${'(' + deal.merit + '원)'}"></small>
+							</th:block>
+							
+						</p>
+						<p>
+							<i class="fas fa-comment-alt"></i> [[${deal.replycount_src}]]　|　 
+							<i class="fas fa-thumbs-up"></i> [[${deal.likeit_src}]]　|　
+							<i class="fas fa-thumbs-down"></i> [[${deal.dislikeit_src}]]
+						</p>
+					</div>
+					<div class="opinion">
+						<p>
+							<button type="button" class="btn btn-xs btn-wish mr-1" th:attr="data-dealno=${deal.dealno}" data-toggle="modal" data-target="#modal-signin">
+								<th:block th:if="${#lists.isEmpty(wishlist)}">
+									<i class="far fa-heart"></i>찜하기
+								</th:block>
+								<th:block th:unless="${#lists.isEmpty(wishlist)}">
+									<i th:class="${#lists.contains(wishedDealnoList, deal.dealno) ? 'fas fa-heart' : 'far fa-heart'}"></i>찜하기
+								</th:block>
+							</button>
+							<button type="button" class="btn btn-xs btn-share" th:attr="data-clipboard-text=${'https://eoisa.ml/deal/' + deal.dealno}">
+								<i class="fas fa-share-alt"></i>공유하기
+							</button>
+							<th:block th:if="${deal.replycount ne 0}">
+								<button type="button" class="btn btn-xs btn-toggle" th:attr="data-dealno=${deal.dealno}">
+									<i class="far fa-eye-slash"></i>댓글 보기/숨기기
+								</button>
+							</th:block>
+						</p>
+					</div>
+					<hr>
+					
+					<!-- Reply -->
+					<div th:class="${'reply-box-' + deal.dealno}" style="display: none;">
+						<ul th:class="${'reply-list-' + deal.dealno}"></ul>
+						<hr>
+					</div>
+					<div class="reply-input">
+						<form th:attr="data-dealno=${deal.dealno}">
+							<textarea name="reply" rows="1" maxlength="500" spellcheck="false" placeholder="댓글 작성 ... " data-toggle="modal" data-target="#modal-signin" required></textarea>
+						</form>
+						<button type="button" class="btn btn-submit" sec:authorize="isAuthenticated()">확인</button>
+					</div>
+				</div>
+			</li>
+		</th:block>
+	</ul>
+
+	<!-- Ad Banner -->
+	<div class="ad-banner bottom">
+		<img src="/images/adbanner.png" alt="광고 배너">
+	</div>
+	
+	<!-- Dealinfo Loading Indicator -->
+	<div class="loading-indicator">
+		<span class="spinner-border text-danger"></span>
+		<strong>핫딜 정보를 불러오고 있습니다 …</strong>
+	</div>
+</div>

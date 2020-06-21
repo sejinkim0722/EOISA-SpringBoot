@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>로그인 - 어머이건사야해</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/image/favicon.png">
+</head>
+<body>
+	<input type="hidden" id="sign-request" th:value="${request}" />
+
+	<form id="signup" action="/sign/signup" method="POST">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input type="hidden" name="username" th:value="${username}"/>
+		<input type="hidden" name="password" th:value="${password}"/>
+		<input type="hidden" name="nickname" th:value="${nickname}"/>
+		<input type="hidden" name="profile_pic" th:value="${profile_pic}"/>
+		<input type="hidden" name="platform" th:value="${platform}"/>
+	</form>
+	
+	<form id="signin" action="/sign/signin" target="parent" method="POST">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		<input type="hidden" name="username" th:value="${username}"/>
+		<input type="hidden" name="password" th:value="${password}"/>
+	</form>
+
+	<script>
+		let signRequestType = document.querySelector('#sign-request').value;
+
+		if(signRequestType == 'signup') {
+			document.querySelector('#signup').submit();
+		} else if(signRequestType == 'signin') {
+			document.querySelector('#signin').submit();
+			self.close();
+		}
+	</script>
+</body>
+</html>
